@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "nodemon test/test.js"
+    "test": "node test/test.js"
   },
   "repository": {
     "type": "git",
