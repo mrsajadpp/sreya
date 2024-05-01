@@ -56,10 +56,16 @@ function connect(dbname) {
                             const jsonFiles = files.filter(file => path_1.default.extname(file) === '.json');
                             // Log the names of the json files
                             console.log('JSON files in the directory:');
-                            jsonFiles.forEach(file => {
-                                console.log(file);
-                                return file;
+                            // jsonFiles.forEach(file => {
+                            //     console.log(file);
+                            //     return file;
+                            // });
+                            const filenamesWithoutExtension = jsonFiles.map(file => {
+                                const filename = file.split('.json')[0];
+                                console.log(filename);
+                                return filename;
                             });
+                            return filenamesWithoutExtension;
                         });
                     }
                 });
@@ -79,10 +85,16 @@ function connect(dbname) {
                     const jsonFiles = files.filter(file => path_1.default.extname(file) === '.json');
                     // Log the names of the json files
                     console.log('JSON files in the directory:');
-                    jsonFiles.forEach(file => {
-                        console.log(file);
-                        return file;
+                    // jsonFiles.forEach(file => {
+                    //     console.log(file);
+                    //     return file;
+                    // });
+                    const filenamesWithoutExtension = jsonFiles.map(file => {
+                        const filename = file.split('.json')[0];
+                        console.log(filename);
+                        return filename;
                     });
+                    return filenamesWithoutExtension;
                 });
             }
             else {
@@ -101,10 +113,16 @@ function connect(dbname) {
                             const jsonFiles = files.filter(file => path_1.default.extname(file) === '.json');
                             // Log the names of the json files
                             console.log('JSON files in the directory:');
-                            jsonFiles.forEach(file => {
-                                console.log(file);
-                                return file;
+                            // jsonFiles.forEach(file => {
+                            //     console.log(file);
+                            //     return file;
+                            // });
+                            const filenamesWithoutExtension = jsonFiles.map(file => {
+                                const filename = file.split('.json')[0];
+                                console.log(filename);
+                                return filename;
                             });
+                            return filenamesWithoutExtension;
                         });
                     }
                 });

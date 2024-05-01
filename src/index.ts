@@ -27,10 +27,18 @@ export function connect(dbname: string) {
 
                             // Log the names of the json files
                             console.log('JSON files in the directory:');
-                            jsonFiles.forEach(file => {
-                                console.log(file);
-                                return file;
+                            // jsonFiles.forEach(file => {
+                            //     console.log(file);
+                            //     return file;
+                            // });
+                            const filenamesWithoutExtension = jsonFiles.map(file => {
+                                const filename = file.split('.json')[0];
+                                console.log(filename);
+                                return filename;
                             });
+
+                            return filenamesWithoutExtension;
+
                         });
                     }
                 });
@@ -50,10 +58,18 @@ export function connect(dbname: string) {
 
                     // Log the names of the json files
                     console.log('JSON files in the directory:');
-                    jsonFiles.forEach(file => {
-                        console.log(file);
-                        return file;
+                    // jsonFiles.forEach(file => {
+                    //     console.log(file);
+                    //     return file;
+                    // });
+
+                    const filenamesWithoutExtension = jsonFiles.map(file => {
+                        const filename = file.split('.json')[0];
+                        console.log(filename);
+                        return filename;
                     });
+
+                    return filenamesWithoutExtension;
                 });
             } else {
                 fs.mkdir(dbname, (err) => {
@@ -72,10 +88,18 @@ export function connect(dbname: string) {
 
                             // Log the names of the json files
                             console.log('JSON files in the directory:');
-                            jsonFiles.forEach(file => {
-                                console.log(file);
-                                return file;
+                            // jsonFiles.forEach(file => {
+                            //     console.log(file);
+                            //     return file;
+                            // });
+
+                            const filenamesWithoutExtension = jsonFiles.map(file => {
+                                const filename = file.split('.json')[0];
+                                console.log(filename);
+                                return filename;
                             });
+
+                            return filenamesWithoutExtension;
                         });
                     }
                 });
