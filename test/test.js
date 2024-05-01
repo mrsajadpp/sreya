@@ -8,9 +8,11 @@ async function clal() {
     let col = await collection.find('user');
     console.log(col);
 
-    collection.insert('user', {
-        name: 'hi'
-    })
+    // collection.insert('user', {
+    //     name: 'hi'
+    // })
+
+    collection.remove('user', 'lvnqqt1h6m6z1')
 
 }
 clal()

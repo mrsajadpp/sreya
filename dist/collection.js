@@ -51,8 +51,6 @@ var collection;
                 const jsonData = fs_1.default.readFileSync(fileName, 'utf-8');
                 // Parse the JSON data
                 const data = JSON.parse(jsonData);
-                console.log(newData);
-                console.log(data);
                 // Generate a unique ID for the new data
                 newData._id = await generateUniqueID();
                 // Push the new data to the existing array
@@ -71,5 +69,37 @@ var collection;
         }
     }
     collection_1.insert = insert;
+    async function remove(collection, identifier) {
+        try {
+            const dbname = process.env.DB_NAME;
+            const fileName = `${dbname}/${collection}.json`;
+            if (fs_1.default.existsSync(fileName)) {
+                // Read the file synchronously
+                const jsonData = fs_1.default.readFileSync(fileName, 'utf-8');
+                // Parse the JSON data
+                let data = JSON.parse(jsonData);
+                // Find the index of the item with the given identifier
+                const index = data.findIndex((item) => item._id === identifier);
+                if (index !== -1) {
+                    // Remove the item from the array
+                    data.splice(index, 1);
+                    // Write the updated data back to the file
+                    fs_1.default.writeFileSync(fileName, JSON.stringify(data));
+                    return 'Data removed successfully.';
+                }
+                else {
+                    return `Item with identifier '${identifier}' not found in collection '${collection}'.`;
+                }
+            }
+            else {
+                return `Collection '${collection}' does not exist.`;
+            }
+        }
+        catch (error) {
+            console.error('Error removing data:', error);
+            return null;
+        }
+    }
+    collection_1.remove = remove;
 })(collection || (exports.collection = collection = {}));
 //# sourceMappingURL=collection.js.map

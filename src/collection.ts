@@ -67,4 +67,39 @@ export module collection {
             return null;
         }
     }
+
+    export async function remove(collection: string, identifier: string) {
+        try {
+            const dbname = process.env.DB_NAME;
+            const fileName = `${dbname}/${collection}.json`;
+
+            if (fs.existsSync(fileName)) {
+                // Read the file synchronously
+                const jsonData = fs.readFileSync(fileName, 'utf-8');
+
+                // Parse the JSON data
+                let data = JSON.parse(jsonData);
+
+                // Find the index of the item with the given identifier
+                const index = data.findIndex((item: any) => item._id === identifier);
+
+                if (index !== -1) {
+                    // Remove the item from the array
+                    data.splice(index, 1);
+
+                    // Write the updated data back to the file
+                    fs.writeFileSync(fileName, JSON.stringify(data));
+
+                    return 'Data removed successfully.';
+                } else {
+                    return `Item with identifier '${identifier}' not found in collection '${collection}'.`;
+                }
+            } else {
+                return `Collection '${collection}' does not exist.`;
+            }
+        } catch (error) {
+            console.error('Error removing data:', error);
+            return null;
+        }
+    }
 }
