@@ -102,4 +102,21 @@ export module collection {
             return null;
         }
     }
+
+    export async function destroy(collection: string) {
+        try {
+            let dbname = process.env.DB_NAME;
+            const fileName = `${dbname}/${collection}.json`;
+            // Check if the file exists
+            if (fs.existsSync(fileName)) {
+                // Delete the file
+                fs.unlinkSync(fileName);
+                return `File '${fileName}' deleted successfully.`;
+            } else {
+                return `File '${fileName}' does not exist.`;
+            }
+        } catch (error) {
+            return `Error deleting collection: ${error}`;
+        }
+    }
 }

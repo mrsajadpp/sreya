@@ -101,5 +101,24 @@ var collection;
         }
     }
     collection_1.remove = remove;
+    async function destroy(collection) {
+        try {
+            let dbname = process.env.DB_NAME;
+            const fileName = `${dbname}/${collection}.json`;
+            // Check if the file exists
+            if (fs_1.default.existsSync(fileName)) {
+                // Delete the file
+                fs_1.default.unlinkSync(fileName);
+                return `File '${fileName}' deleted successfully.`;
+            }
+            else {
+                return `File '${fileName}' does not exist.`;
+            }
+        }
+        catch (error) {
+            return `Error deleting collection: ${error}`;
+        }
+    }
+    collection_1.destroy = destroy;
 })(collection || (exports.collection = collection = {}));
 //# sourceMappingURL=collection.js.map

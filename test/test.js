@@ -6,13 +6,15 @@ async function clal() {
     collection.create('user')
 
     let col = await collection.find('user');
-    console.log(col);
+    // console.log(col);
 
     // collection.insert('user', {
     //     name: 'hi'
     // })
 
-    collection.remove('user', 'lvnqqt1h6m6z1')
+    collection.destroy('user')
+
+    // collection.remove('user', 'lvnqqt1h6m6z1')
 
 }
 clal()
