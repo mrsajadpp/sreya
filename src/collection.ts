@@ -49,9 +49,6 @@ export module collection {
                 // Parse the JSON data
                 const data = JSON.parse(jsonData);
 
-                console.log(newData);
-                console.log(data);
-
                 // Generate a unique ID for the new data
                 newData._id = await generateUniqueID();
 
