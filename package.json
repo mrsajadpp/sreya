@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/mrsajadpp/sreya#readme",
   "dependencies": {
+    "dotenv": "^16.4.5",
     "fs": "^0.0.1-security",
     "nodemon": "^3.1.0"
   },
