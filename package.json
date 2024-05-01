@@ -30,6 +30,11 @@
   },
   "homepage": "https://github.com/mrsajadpp/sreya#readme",
   "dependencies": {
+    "fs": "^0.0.1-security",
     "nodemon": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "typescript": "^5.4.5"
   }
 }
