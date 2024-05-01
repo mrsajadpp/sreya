@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "target": "es2017", // Specify the ECMAScript target version (e.g., "es6")
+        "module": "commonjs", // Specify the module system (e.g., "commonjs" for Node.js)
+        "outDir": "dist", // Specify the output directory for compiled JavaScript files
+        "strict": true, // Enable strict type-checking options
+        "esModuleInterop": true, // Allow default imports from modules with no default export
+        "declaration": true, // Generate corresponding .d.ts files for TypeScript files
+        "sourceMap": true, // Generate source map files for better debugging experience
+        "lib": [
+            "es2017"
+        ]
+    },
+    "include": [
+        "src"
+    ], // Specify which files to include in compilation (e.g., all files in the "src" directory)
+    "exclude": [
+        "node_modules",
+        "dist"
+    ] // Specify which files to exclude from compilation (e.g., "node_modules" and "dist" directories)
+}

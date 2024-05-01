@@ -1,0 +1,30 @@
+{
+  "name": "sreya",
+  "version": "1.0.0",
+  "description": "Sreya is a versatile in-memory database for Node.js applications.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "nodemon test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrsajadpp/sreya.git"
+  },
+  "keywords": [
+    "sreya",
+    "sreyadb",
+    "grovixlab",
+    "thintry",
+    "database"
+  ],
+  "author": "Sajad",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mrsajadpp/sreya/issues"
+  },
+  "homepage": "https://github.com/mrsajadpp/sreya#readme"
+}
