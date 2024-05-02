@@ -69,7 +69,7 @@ var collection;
         }
     }
     collection_1.insert = insert;
-    async function remove(collection, identifier) {
+    async function remove(collection, { key, value }) {
         try {
             const dbname = process.env.DB_NAME;
             const fileName = `${dbname}/${collection}.json`;
@@ -78,17 +78,18 @@ var collection;
                 const jsonData = fs_1.default.readFileSync(fileName, 'utf-8');
                 // Parse the JSON data
                 let data = JSON.parse(jsonData);
-                // Find the index of the item with the given identifier
-                const index = data.findIndex((item) => item._id === identifier);
-                if (index !== -1) {
+                // Find the index of the item to remove
+                const indexToRemove = data.findIndex((item) => item[key] === value);
+                // console.log(indexToRemove);
+                if (indexToRemove !== -1) {
                     // Remove the item from the array
-                    data.splice(index, 1);
+                    data.splice(indexToRemove, 1);
                     // Write the updated data back to the file
                     fs_1.default.writeFileSync(fileName, JSON.stringify(data));
-                    return 'Data removed successfully.';
+                    return `Item with ${key} '${value}' removed from collection '${collection}'.`;
                 }
                 else {
-                    return `Item with identifier '${identifier}' not found in collection '${collection}'.`;
+                    return `Item with ${key} '${value}' not found in collection '${collection}'.`;
                 }
             }
             else {
@@ -120,5 +121,39 @@ var collection;
         }
     }
     collection_1.destroy = destroy;
+    async function update(collection, { key, value }, newData) {
+        try {
+            const dbname = process.env.DB_NAME;
+            const fileName = `${dbname}/${collection}.json`;
+            if (fs_1.default.existsSync(fileName)) {
+                // Read the file synchronously
+                const jsonData = fs_1.default.readFileSync(fileName, 'utf-8');
+                // Parse the JSON data
+                let data = JSON.parse(jsonData);
+                // Find the index of the item to update
+                const indexToUpdate = data.findIndex((item) => item[key] === value);
+                if (indexToUpdate !== -1) {
+                    // Update the _id field from the existing data
+                    newData._id = data[indexToUpdate]._id;
+                    // Update the data at the found index
+                    data[indexToUpdate] = newData;
+                    // Write the updated data back to the file
+                    fs_1.default.writeFileSync(fileName, JSON.stringify(data));
+                    return `Item with ${key} '${value}' updated in collection '${collection}'.`;
+                }
+                else {
+                    return `Item with ${key} '${value}' not found in collection '${collection}'.`;
+                }
+            }
+            else {
+                return `Collection '${collection}' does not exist.`;
+            }
+        }
+        catch (error) {
+            console.error('Error updating data:', error);
+            return null;
+        }
+    }
+    collection_1.update = update;
 })(collection || (exports.collection = collection = {}));
 //# sourceMappingURL=collection.js.map

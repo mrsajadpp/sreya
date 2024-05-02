@@ -68,7 +68,7 @@ export module collection {
         }
     }
 
-    export async function remove(collection: string, identifier: string) {
+    export async function remove(collection: string, { key, value }: { key: string, value: any }): Promise<string | null> {
         try {
             const dbname = process.env.DB_NAME;
             const fileName = `${dbname}/${collection}.json`;
@@ -80,19 +80,22 @@ export module collection {
                 // Parse the JSON data
                 let data = JSON.parse(jsonData);
 
-                // Find the index of the item with the given identifier
-                const index = data.findIndex((item: any) => item._id === identifier);
+                // Find the index of the item to remove
+                const indexToRemove = data.findIndex((item: any) => item[key] === value);
 
-                if (index !== -1) {
+                // console.log(indexToRemove);
+
+
+                if (indexToRemove !== -1) {
                     // Remove the item from the array
-                    data.splice(index, 1);
+                    data.splice(indexToRemove, 1);
 
                     // Write the updated data back to the file
                     fs.writeFileSync(fileName, JSON.stringify(data));
 
-                    return 'Data removed successfully.';
+                    return `Item with ${key} '${value}' removed from collection '${collection}'.`;
                 } else {
-                    return `Item with identifier '${identifier}' not found in collection '${collection}'.`;
+                    return `Item with ${key} '${value}' not found in collection '${collection}'.`;
                 }
             } else {
                 return `Collection '${collection}' does not exist.`;
@@ -117,6 +120,44 @@ export module collection {
             }
         } catch (error) {
             return `Error deleting collection: ${error}`;
+        }
+    }
+
+    export async function update(collection: string, { key, value }: { key: string, value: any }, newData: any): Promise<string | null> {
+        try {
+            const dbname = process.env.DB_NAME;
+            const fileName = `${dbname}/${collection}.json`;
+
+            if (fs.existsSync(fileName)) {
+                // Read the file synchronously
+                const jsonData = fs.readFileSync(fileName, 'utf-8');
+
+                // Parse the JSON data
+                let data = JSON.parse(jsonData);
+
+                // Find the index of the item to update
+                const indexToUpdate = data.findIndex((item: any) => item[key] === value);
+
+                if (indexToUpdate !== -1) {
+                    // Update the _id field from the existing data
+                    newData._id = data[indexToUpdate]._id;
+
+                    // Update the data at the found index
+                    data[indexToUpdate] = newData;
+
+                    // Write the updated data back to the file
+                    fs.writeFileSync(fileName, JSON.stringify(data));
+
+                    return `Item with ${key} '${value}' updated in collection '${collection}'.`;
+                } else {
+                    return `Item with ${key} '${value}' not found in collection '${collection}'.`;
+                }
+            } else {
+                return `Collection '${collection}' does not exist.`;
+            }
+        } catch (error) {
+            console.error('Error updating data:', error);
+            return null;
         }
     }
 }
