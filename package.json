@@ -1,6 +1,6 @@
 {
   "name": "sreya",
-  "version": "1.2.0",
+  "version": "1.3.1",
   "description": "Sreya is a versatile in-memory database for Node.js applications.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
